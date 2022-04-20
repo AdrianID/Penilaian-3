@@ -20,7 +20,10 @@
     </head>
     <body class="antialiased">
         <div id="app">
-            <router-view></router-view>
+            <div class="container pt-4">
+                <navbar></navbar>
+                <router-view></router-view>
+            </div>
         </div>
         <script src="../js/app.js"></script>
     </body>

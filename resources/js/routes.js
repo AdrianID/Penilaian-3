@@ -1,11 +1,16 @@
-import ExampleComponent from './components/ExampleComponent';
+import ProductList from './components/Product/Product_List.vue';
+import CartList from './components/Cart/Cart_List.vue';
 export const routes = [
     {
-        path: '/ExampleComponent',
-        component: ExampleComponent
-      },
-      {
+        path: '/product',
+        component: ProductList
+    },
+    {
+        path: '/cart',
+        component: CartList
+    },
+    {
         path: '/',
-        redirect: '/ExampleComponent'
-      },
+        redirect: '/product'
+    },
 ];
