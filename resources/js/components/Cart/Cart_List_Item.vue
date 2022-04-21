@@ -1,14 +1,23 @@
 <template>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td><button class="btn btn-primary">Delete</button></td>
+      <th scope="row">{{cartItem.title}}</th>
+      <td>{{cartItem.price}}</td>
+      <td>{{cartItem.quantity}}</td>
+      <td><button class="btn btn-primary" @click="deleteItem()">Delete</button></td>
     </tr>
 </template>
 
 <script>
 export default {
-  name: "CartListItem"
+  name: "CartListItem",
+  props: ['cartItem'],
+  methods: {
+      deleteItem(){
+          this.$store.dispatch('deleteItemFromCart',{
+              id: this.cartItem.id,
+              quantity: this.cartItem.quantity
+          })
+      }
+  },
 };
 </script>

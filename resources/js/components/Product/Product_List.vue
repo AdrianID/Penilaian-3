@@ -1,5 +1,5 @@
 <template>
-        <div class="w-50">
+        <div class="main">
             <h1 class="display-4">Semua Produk</h1>
             <table class="table table-hover">
                 <thead>
@@ -12,18 +12,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ProductListItem></ProductListItem>
+                    <ProductListItem v-for="productItem in productItems" :key="productItem.id" :productItem="productItem"/>
                 </tbody>
             </table>
         </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ProductListItem from './Product_List_Item.vue'
+
 export default {
   name: "ProductList",
   components:{
       ProductListItem
+  },
+  components: {
+    ProductListItem
+  },
+  computed: {
+    ...mapGetters([
+      'productItems'
+    ])
   }
 };
 </script>
+<style scoped>
+.main{
+    max-width: 80%;
+}
+</style>

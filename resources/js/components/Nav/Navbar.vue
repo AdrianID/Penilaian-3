@@ -4,7 +4,7 @@
                <strong>Product List</strong>
         </router-link>
         <router-link to="/cart" class="btn btn-primary">
-               <strong> Check Out</strong>
+               <strong> Check Out ({{cartTotal}})</strong>
         </router-link>
         <!-- <button class="btn btn-primary-outline">Product List</button>
         <button class="btn btn-primary">Check Out</button> -->
@@ -12,7 +12,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
+    computed:{
+        ...mapGetters(["cartTotal"])
+        
+    }
 };
 </script>
 <style scoped>
