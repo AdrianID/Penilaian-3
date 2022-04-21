@@ -36,9 +36,7 @@ export default {
     ])
   },
   
-  created() {
-    this.$store.dispatch('getProductItems');
-  }
+ 
 };
 </script>
 <style scoped>

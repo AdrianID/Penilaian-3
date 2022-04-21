@@ -38,5 +38,8 @@ Vue.component('navbar', require('./components/Nav/Navbar.vue').default);
 const app = new Vue({
     el: '#app',
     store,
-    router
+    router,
+    created() {
+        this.$store.dispatch('getProductItems');
+      }
 });

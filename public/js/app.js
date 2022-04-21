@@ -5435,9 +5435,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 }, _defineProperty(_name$components$comp, "components", {
   ProductListItem: _Product_List_Item_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-}), _defineProperty(_name$components$comp, "computed", _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['productItems']))), _defineProperty(_name$components$comp, "created", function created() {
-  this.$store.dispatch('getProductItems');
-}), _name$components$comp);
+}), _defineProperty(_name$components$comp, "computed", _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['productItems']))), _name$components$comp);
 
 /***/ }),
 
@@ -5530,7 +5528,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#app',
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
-  router: router
+  router: router,
+  created: function created() {
+    this.$store.dispatch('getProductItems');
+  }
 });
 
 /***/ }),
