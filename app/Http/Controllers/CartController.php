@@ -13,7 +13,7 @@ class CartController extends Controller
         
     }
     public function addDataCart(Request $request){
-        $path = base_path()."/mocking/cart.json";
+        $path = base_path()."/mocking/Data_Cart.json";
         $json = json_decode(file_get_contents($path),true);
         array_push($json, $request->post());
         return response()->json($json);

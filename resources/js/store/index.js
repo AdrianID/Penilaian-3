@@ -9,20 +9,22 @@ export default new Vuex.Store({
   state: {
     cartItems: [],
     cartTotal: 0,
-    productItems: []
+    productItems: [],
+    totalPrice:0
 
   },
   getters: {
     cartItems: state => state.cartItems,
     cartTotal: state => state.cartTotal,
-    productItems: state => state.productItems
+    productItems: state => state.productItems,
+    TotalPrice: state => state.totalPrice
   },
   mutations: {
     UPDATE_CART_ITEMS (state, payload) {
         state.cartItems = payload;
     },
     ADD_TO_CART(state,{id,title,price,quantity}){
-
+        state.totalPrice += price;
         state.cartTotal += quantity;
         let findProduct = state.productItems.find(o => o.id === id)
         

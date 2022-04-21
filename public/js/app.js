@@ -5293,6 +5293,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5300,7 +5307,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     CartListItem: _Cart_List_Item_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(["cartItems"]))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(["cartItems", "TotalPrice"]))
 });
 
 /***/ }),
@@ -5428,7 +5435,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 }, _defineProperty(_name$components$comp, "components", {
   ProductListItem: _Product_List_Item_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-}), _defineProperty(_name$components$comp, "computed", _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['productItems']))), _name$components$comp);
+}), _defineProperty(_name$components$comp, "computed", _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['productItems']))), _defineProperty(_name$components$comp, "created", function created() {
+  this.$store.dispatch('getProductItems');
+}), _name$components$comp);
 
 /***/ }),
 
@@ -5614,7 +5623,8 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
   state: {
     cartItems: [],
     cartTotal: 0,
-    productItems: []
+    productItems: [],
+    totalPrice: 0
   },
   getters: {
     cartItems: function cartItems(state) {
@@ -5625,6 +5635,9 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
     },
     productItems: function productItems(state) {
       return state.productItems;
+    },
+    TotalPrice: function TotalPrice(state) {
+      return state.totalPrice;
     }
   },
   mutations: {
@@ -5636,6 +5649,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
           title = _ref.title,
           price = _ref.price,
           quantity = _ref.quantity;
+      state.totalPrice += price;
       state.cartTotal += quantity;
       var findProduct = state.productItems.find(function (o) {
         return o.id === id;
@@ -29172,15 +29186,36 @@ var render = function () {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.cartItems, function (cartItem) {
-          return _c("CartListItem", {
-            key: cartItem.id,
-            attrs: { cartItem: cartItem },
-          })
-        }),
-        1
+        [
+          _vm._l(_vm.cartItems, function (cartItem) {
+            return _c("CartListItem", {
+              key: cartItem.id,
+              attrs: { cartItem: cartItem },
+            })
+          }),
+          _vm._v(" "),
+          _c("tr", [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td", [_c("h3", [_vm._v("Rp. " + _vm._s(_vm.TotalPrice))])]),
+            _vm._v(" "),
+            _c("td"),
+          ]),
+        ],
+        2
       ),
     ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { onClick: "alert('Checkout Berhasil')" },
+      },
+      [_vm._v("Checkout")]
+    ),
   ])
 }
 var staticRenderFns = [
@@ -29199,6 +29234,12 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }),
       ]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("h3", [_vm._v("Total :")])])
   },
 ]
 render._withStripped = true
@@ -29381,7 +29422,7 @@ var render = function () {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.productItem.stock))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.productItem.price))]),
+    _c("td", [_vm._v("Rp. " + _vm._s(_vm.productItem.price))]),
     _vm._v(" "),
     _c("td", [
       _c(

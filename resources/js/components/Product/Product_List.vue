@@ -34,6 +34,10 @@ export default {
     ...mapGetters([
       'productItems'
     ])
+  },
+  
+  created() {
+    this.$store.dispatch('getProductItems');
   }
 };
 </script>

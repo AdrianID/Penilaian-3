@@ -1,9 +1,9 @@
 <template>
     <tr>
       <th scope="row">{{productItem.title }}</th>
-      <td>{{productItem.description }}</td>
+      <td >{{productItem.description }}</td>
       <td>{{productItem.stock }}</td>
-      <td>{{productItem.price }}</td>
+      <td>Rp. {{productItem.price }}</td>
       <td><button class="btn btn-primary" @click="addToCart()">Add to Cart</button></td>
     </tr>
 </template>

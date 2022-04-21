@@ -12,8 +12,15 @@
                 </thead>
                 <tbody>
                     <CartListItem v-for="cartItem in cartItems" :key="cartItem.id" :cartItem="cartItem"></CartListItem>
+                    <tr>
+                       <td> <h3>Total :</h3></td>
+                       <td></td>
+                       <td><h3>Rp. {{TotalPrice}}</h3></td> 
+                       <td></td>
+                    </tr>
                 </tbody>
             </table>
+            <button class="btn btn-primary" onClick="alert('Checkout Berhasil')">Checkout</button>
         </div>
 </template>
 
@@ -26,7 +33,7 @@ export default {
       CartListItem
   },
   computed: {
-    ...mapGetters(["cartItems"]),
+    ...mapGetters(["cartItems","TotalPrice"]),
   }
 };
 </script>
