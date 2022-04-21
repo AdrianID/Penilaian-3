@@ -1,7 +1,7 @@
 <template>
     <tr>
       <th scope="row">{{cartItem.title}}</th>
-      <td>{{cartItem.price}}</td>
+      <td>Rp. {{cartItem.price}}</td>
       <td>{{cartItem.quantity}}</td>
       <td><button class="btn btn-primary" @click="deleteItem()">Delete</button></td>
     </tr>
