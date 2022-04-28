@@ -29268,7 +29268,7 @@ var render = function () {
   return _c("tr", [
     _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.cartItem.title))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.cartItem.price))]),
+    _c("td", [_vm._v("Rp. " + _vm._s(_vm.cartItem.price))]),
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.cartItem.quantity))]),
     _vm._v(" "),
