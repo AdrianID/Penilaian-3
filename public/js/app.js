@@ -5339,6 +5339,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteItem: function deleteItem() {
       this.$store.dispatch('deleteItemFromCart', {
         id: this.cartItem.id,
+        price: this.cartItem.price,
         quantity: this.cartItem.quantity
       });
     }
@@ -5642,9 +5643,6 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
     }
   },
   mutations: {
-    UPDATE_CART_ITEMS: function UPDATE_CART_ITEMS(state, payload) {
-      state.cartItems = payload;
-    },
     ADD_TO_CART: function ADD_TO_CART(state, _ref) {
       var id = _ref.id,
           title = _ref.title,
@@ -5676,6 +5674,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
     },
     DELETE_ITEM_CART: function DELETE_ITEM_CART(state, _ref2) {
       var id = _ref2.id,
+          price = _ref2.price,
           quantity = _ref2.quantity;
       var findProduct = state.productItems.find(function (o) {
         return o.id === id;
@@ -5693,21 +5692,17 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         findCart.quantity -= 1;
         findProduct.stock += 1;
       }
+
+      state.totalPrice -= price;
     }
   },
   actions: {
-    getCartItems: function getCartItems(_ref3) {
+    addProductToCart: function addProductToCart(_ref3, _ref4) {
       var commit = _ref3.commit;
-      axios.get('api/get_data_cart').then(function (response) {
-        commit('UPDATE_CART_ITEMS', response.data);
-      });
-    },
-    addProductToCart: function addProductToCart(_ref4, _ref5) {
-      var commit = _ref4.commit;
-      var id = _ref5.id,
-          title = _ref5.title,
-          price = _ref5.price,
-          quantity = _ref5.quantity;
+      var id = _ref4.id,
+          title = _ref4.title,
+          price = _ref4.price,
+          quantity = _ref4.quantity;
       commit('ADD_TO_CART', {
         id: id,
         title: title,
@@ -5715,18 +5710,20 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         quantity: quantity
       });
     },
-    getProductItems: function getProductItems(_ref6) {
-      var commit = _ref6.commit;
+    getProductItems: function getProductItems(_ref5) {
+      var commit = _ref5.commit;
       axios.get("/api/get_data_product").then(function (response) {
         commit('UPDATE_PRODUCT_ITEMS', response.data);
       });
     },
-    deleteItemFromCart: function deleteItemFromCart(_ref7, _ref8) {
-      var commit = _ref7.commit;
-      var id = _ref8.id,
-          quantity = _ref8.quantity;
+    deleteItemFromCart: function deleteItemFromCart(_ref6, _ref7) {
+      var commit = _ref6.commit;
+      var id = _ref7.id,
+          price = _ref7.price,
+          quantity = _ref7.quantity;
       commit('DELETE_ITEM_CART', {
         id: id,
+        price: price,
         quantity: quantity
       });
     }

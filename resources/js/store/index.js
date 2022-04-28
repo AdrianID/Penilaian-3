@@ -20,9 +20,6 @@ export default new Vuex.Store({
     TotalPrice: state => state.totalPrice
   },
   mutations: {
-    UPDATE_CART_ITEMS (state, payload) {
-        state.cartItems = payload;
-    },
     ADD_TO_CART(state,{id,title,price,quantity}){
         state.totalPrice += price;
         state.cartTotal += quantity;
@@ -46,7 +43,7 @@ export default new Vuex.Store({
         state.productItems = payload;
     },
 
-    DELETE_ITEM_CART(state,{id,quantity}){
+    DELETE_ITEM_CART(state,{id,price,quantity}){
         let findProduct = state.productItems.find(o => o.id === id)
         let findCart = state.cartItems.find(o => o.id === id)
         if(quantity === 1){
@@ -58,16 +55,12 @@ export default new Vuex.Store({
             findCart.quantity -= 1;
             findProduct.stock += 1;
         }
+        state.totalPrice -= price;
     }
 
 
   },
   actions: {
-    getCartItems ({ commit }) {
-        axios.get('api/get_data_cart').then((response) => {
-          commit('UPDATE_CART_ITEMS', response.data)
-        });
-    },
     addProductToCart({commit},{id,title,price , quantity}){
         commit('ADD_TO_CART',{id,title,price, quantity});
     },
@@ -77,8 +70,8 @@ export default new Vuex.Store({
           commit('UPDATE_PRODUCT_ITEMS', response.data)
         });
     },
-    deleteItemFromCart({commit},{id,quantity}){
-        commit('DELETE_ITEM_CART',{id,quantity});
+    deleteItemFromCart({commit},{id,price,quantity}){
+        commit('DELETE_ITEM_CART',{id,price,quantity});
     }
   },
   modules: {

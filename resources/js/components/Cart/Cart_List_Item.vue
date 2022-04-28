@@ -15,6 +15,7 @@ export default {
       deleteItem(){
           this.$store.dispatch('deleteItemFromCart',{
               id: this.cartItem.id,
+              price: this.cartItem.price,
               quantity: this.cartItem.quantity
           })
       }
