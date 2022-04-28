@@ -18,8 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('get_data_product','App\Http\Controllers\ProductController@getDataProduct');
-    
+
 
 Route::group([
     'prefix' => 'auth'
@@ -31,5 +30,6 @@ Route::group([
     Route::post('logout','App\Http\Controllers\AuthController@logout');
     Route::post('refresh','App\Http\Controllers\AuthController@refresh');
     Route::get('data','App\Http\Controllers\AuthController@data');
+    Route::get('get_data_product','App\Http\Controllers\ProductController@getDataProduct');
     });
 });
