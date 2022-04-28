@@ -5693,6 +5693,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
         findProduct.stock += 1;
       }
 
+      state.cartTotal -= 1;
       state.totalPrice -= price;
     }
   },

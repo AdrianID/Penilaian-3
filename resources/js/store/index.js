@@ -55,6 +55,7 @@ export default new Vuex.Store({
             findCart.quantity -= 1;
             findProduct.stock += 1;
         }
+        state.cartTotal -= 1;
         state.totalPrice -= price;
     }
 
